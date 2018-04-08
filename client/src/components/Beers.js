@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 
 class Beers extends React.Component{
-  state = { beers: [], open: false }
+  state = { beers: [], }
 
   componentWillMount() {
     axios.get('/api/all_beers')
@@ -17,12 +17,9 @@ class Beers extends React.Component{
       console.log("NoBeerForYou = " + err)
     })
   }
-  show = dimmer => () => this.setState({ dimmer, open: true })
-  close = () => this.setState({ open: false })  
 
   render(){
     const beers = this.state.beers
-    const { open, dimmer } = this.state
 
     return(
       <Segment style={styles.header}>
@@ -44,8 +41,8 @@ class Beers extends React.Component{
                       <Image src='https://food.fnr.sndimg.com/content/dam/images/food/fullset/2015/11/20/0/fnd_beer-istock.jpg.rend.hgtvcom.616.462.suffix/1448031613421.jpeg' />
                       <Card.Content>
                         <Card.Header>{b.name}</Card.Header>
-                        <Card.Description>ABV: {b.abv}%</Card.Description>
-                        <Card.Description>IBU: {b.ibu}</Card.Description>
+                        <Card.Description>ABV: { b.abv? b.abv : 'N/A'}%</Card.Description>
+                        <Card.Description>IBU: {b.ibu? b.ibu : 'N/A'}</Card.Description>
                         <Card.Description style={styles.description}>
                           {b.description}
                         </Card.Description>
@@ -55,8 +52,8 @@ class Beers extends React.Component{
                             <Image wrapped size='large' src='https://food.fnr.sndimg.com/content/dam/images/food/fullset/2015/11/20/0/fnd_beer-istock.jpg.rend.hgtvcom.616.462.suffix/1448031613421.jpeg' />
                             <Modal.Description>
                               <Header>{b.name}</Header>
-                              <p>ABV: {b.abv}%</p>
-                              <p>IBU: {b.ibu}</p>
+                              <p>ABV: { b.abv? b.abv : 'N/A'}%</p>
+                              <p>IBU: {b.ibu? b.ibu : 'N/A'}</p>
                               <p>{b.description}</p>
                             </Modal.Description>
                           </Modal.Content>

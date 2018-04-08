@@ -42,10 +42,10 @@ class Breweries extends React.Component{
                       <Image src='http://enlightenedbeer.com/img/brewery02.jpg' />
                       <Card.Content>
                         <Card.Header>{b.name}</Card.Header>
-                        <Card.Description>Established: {b.established}</Card.Description>
-                        <Card.Description>Class: {b.brand_classification}</Card.Description>
+                        <Card.Description>Established: {b.established? b.established : 'N/A'}</Card.Description>
+                        <Card.Description>Class: {b.brand_classification? b.brand_classification : "N/A"}</Card.Description>
                         <Card.Description style={styles.description}>
-                          {b.description}
+                          {b.description? b.description : "N/A"}
                         </Card.Description>
                         <Modal trigger={<Button fluid>More Info</Button>}>
                           <Modal.Header>Brewery Info</Modal.Header>
@@ -53,9 +53,9 @@ class Breweries extends React.Component{
                             <Image wrapped size='medium' src='http://enlightenedbeer.com/img/brewery02.jpg' />
                             <Modal.Description>
                               <Header>{b.name}</Header>
-                              <p>{b.brand_classification}</p>
-                              <p>{b.description}</p>
-                              <p>{b.established}</p>
+                              <p>Established: {b.established? b.established : 'N/A'}</p>
+                              <p>Class: {b.brand_classification? b.brand_classification : "N/A"}</p>
+                              <p>About: {b.description? b.description : "N/A"}</p>
                             </Modal.Description>
                           </Modal.Content>
                         </Modal>
