@@ -46,7 +46,7 @@ class Beers extends React.Component{
                         <Card.Description style={styles.description}>
                           {b.description}
                         </Card.Description>
-                        <Modal trigger={<Button primary fluid >More Info</Button>}>
+                        <Modal trigger={<Button fluid >More Info</Button>}>
                           <Modal.Header>Beer Info</Modal.Header>
                           <Modal.Content image>
                             <Image wrapped size='large' src='https://food.fnr.sndimg.com/content/dam/images/food/fullset/2015/11/20/0/fnd_beer-istock.jpg.rend.hgtvcom.616.462.suffix/1448031613421.jpeg' />
