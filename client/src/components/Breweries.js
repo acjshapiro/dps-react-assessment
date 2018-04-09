@@ -1,8 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Segment, Header, Grid, Divider, Card, Image, Icon , Button, Modal, Input} from 'semantic-ui-react';
-
-
+import { Link } from 'react-router-dom';
 
 class Breweries extends React.Component{
   state = { breweries: [], search: '' }
@@ -71,6 +70,9 @@ class Breweries extends React.Component{
                             <Image wrapped size='medium' src='http://enlightenedbeer.com/img/brewery02.jpg' />
                             <Modal.Description>
                               <Header>{b.name}</Header>
+                              <p>Website: <a href={b.website}>
+                                {b.website}</a>
+                              </p>   
                               <p>Established: {b.established? b.established : 'N/A'}</p>
                               <p>Class: {b.brand_classification? b.brand_classification : "N/A"}</p>
                               <p>About: {b.description? b.description : "N/A"}</p>
@@ -79,7 +81,7 @@ class Breweries extends React.Component{
                         </Modal>
                       </Card.Content>
                       <Card.Content extra>
-                        <a>
+                        <a href={b.website}>
                           <Icon name='external' />
                           {b.website}
                         </a>
