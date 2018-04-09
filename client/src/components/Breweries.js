@@ -54,7 +54,7 @@ class Breweries extends React.Component{
               </Grid.Row>  
               {
                 filteredBreweries.map(b =>
-                  <Grid.Column computer={5} tablet={8} mobile={16}>
+                  <Grid.Column computer={4} tablet={8} mobile={16}>
                     <Card>
                       <Image src='http://enlightenedbeer.com/img/brewery02.jpg' />
                       <Card.Content>

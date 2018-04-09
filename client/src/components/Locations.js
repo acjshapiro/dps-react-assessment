@@ -55,7 +55,7 @@ class Locations extends React.Component{
               </Grid.Row>  
               {
                 filteredLocations.map(l =>
-                  <Grid.Column computer={5} tablet={8} mobile={16}>
+                  <Grid.Column computer={4} tablet={8} mobile={16}>
                     <Card>
                       <Image src='https://sep.yimg.com/ay/kkapers2/store-locations-30.gif' />
                       <Card.Content>

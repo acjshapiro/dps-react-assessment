@@ -55,7 +55,7 @@ class Glassware extends React.Component{
               </Grid.Row>  
               {
                 filteredGlassware.map(g =>
-                  <Grid.Column computer={5} tablet={8} mobile={16}>
+                  <Grid.Column computer={4} tablet={8} mobile={16}>
                     <Card>
                       <Image src='http://cdn.hiconsumption.com/wp-content/uploads/2016/04/Beer-Drinkers-Guide-To-Glassware-0.jpg' />
                       <Card.Content>
