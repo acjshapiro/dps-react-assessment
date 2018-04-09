@@ -56,7 +56,7 @@ class Breweries extends React.Component{
                 filteredBreweries.map(b =>
                   <Grid.Column computer={4} tablet={8} mobile={16}>
                     <Card>
-                      <Image src='http://enlightenedbeer.com/img/brewery02.jpg' />
+                      <Image style={styles.images} src={b.images? b.images.large :'http://c0.thejournal.ie/media/2018/03/pink-ipa-2-290x80.jpg' } />
                       <Card.Content>
                         <Card.Header>{b.name}</Card.Header>
                         <Card.Description>Established: {b.established? b.established : 'N/A'}</Card.Description>
@@ -67,7 +67,7 @@ class Breweries extends React.Component{
                         <Modal trigger={<Button fluid>More Info</Button>}>
                           <Modal.Header>Brewery Info</Modal.Header>
                           <Modal.Content image>
-                            <Image wrapped size='medium' src='http://enlightenedbeer.com/img/brewery02.jpg' />
+                            <Image wrapped size='medium' src={ b.images? b.images.square_large : 'http://enlightenedbeer.com/img/brewery02.jpg'} />
                             <Modal.Description>
                               <Header>{b.name}</Header>
                               <p>Website: <a href={b.website}>
@@ -124,7 +124,6 @@ const styles = {
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    
   }
 }
 export default Breweries;
