@@ -57,7 +57,7 @@ class Beers extends React.Component{
                 filteredBeers.map(b =>
                   <Grid.Column computer={4} tablet={8} mobile={16}>
                     <Card>
-                      <Image src='https://food.fnr.sndimg.com/content/dam/images/food/fullset/2015/11/20/0/fnd_beer-istock.jpg.rend.hgtvcom.616.462.suffix/1448031613421.jpeg' />
+                      <Image style={styles.images} src={ b.labels? b.labels.large : 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2015/11/20/0/fnd_beer-istock.jpg.rend.hgtvcom.616.462.suffix/1448031613421.jpeg'} />
                       <Card.Content>
                         <Card.Header>{b.name}</Card.Header>
                         <Card.Description>ABV: { b.abv? b.abv : 'N/A'}%</Card.Description>
@@ -107,6 +107,10 @@ const styles = {
   scroller: { 
     height: '60vh', 
     overflow: 'auto',
+  },
+  images: {
+    height: '218px',
+    width: '290px',
   }
 }
 export default Beers;
