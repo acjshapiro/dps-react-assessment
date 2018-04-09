@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-import { Segment, Header, Grid, Divider, Card, Image, Icon, Button, Modal } from 'semantic-ui-react';
+import { Segment, Header, Grid, Divider, Card, Image, Icon, Button, Modal, Input } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import InfiniteScroll from 'react-infinite-scroller';
 
 
 class Beers extends React.Component{
-  state = { beers: [], }
+  state = { beers: [], search: ''} 
 
   componentWillMount() {
     axios.get('/api/all_beers')
@@ -17,10 +18,18 @@ class Beers extends React.Component{
       console.log("NoBeerForYou = " + err)
     })
   }
+  handleChange = (e) => {
+    this.setState({ search: e.target.value }
+    );
+  }
 
   render(){
-    const beers = this.state.beers
-
+    let filteredBeers = this.state.beers.filter(
+      (beer) => {
+        return beer.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+      }
+    )
+    
     return(
       <Segment style={styles.header}>
         <Grid.Column computer={5} tablet={8} mobile={16}>
@@ -33,9 +42,19 @@ class Beers extends React.Component{
             Check Out My Beers
             </Header>
           <Divider />
-            <Grid centered>
+          <Grid centered>
+              <Grid.Row>
+                <Grid.Column mobile={16} tablet={16} computer={4}>
+                  <Input
+                    value={this.state.search}
+                    onChange={this.handleChange}
+                    icon={{ name: 'search', circular: true }}
+                    placeholder="Search..."
+                  />
+                </Grid.Column>
+              </Grid.Row>  
               {
-                beers.map(b =>
+                filteredBeers.map(b =>
                   <Grid.Column computer={5} tablet={8} mobile={16}>
                     <Card>
                       <Image src='https://food.fnr.sndimg.com/content/dam/images/food/fullset/2015/11/20/0/fnd_beer-istock.jpg.rend.hgtvcom.616.462.suffix/1448031613421.jpeg' />
@@ -63,7 +82,7 @@ class Beers extends React.Component{
                   </Grid.Column>
                 )
               }
-            </Grid>
+            </Grid> 
         </Segment>    
         </Grid.Column>
       </Segment>
@@ -83,8 +102,11 @@ const styles = {
   description:{
     whiteSpace: 'nowrap',
     overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    
+    textOverflow: 'ellipsis', 
+  },
+  scroller: { 
+    height: '60vh', 
+    overflow: 'auto',
   }
 }
 export default Beers;

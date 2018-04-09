@@ -1,26 +1,34 @@
 import React from 'react';
 import axios from 'axios';
-import { Segment, Header, Grid, Divider, Card, Image, Icon , Button, Modal} from 'semantic-ui-react';
+import { Segment, Header, Grid, Divider, Card, Image, Icon , Button, Modal, Input} from 'semantic-ui-react';
 
 
 
 class Breweries extends React.Component{
-  state = { breweries: [] }
+  state = { breweries: [], search: '' }
 
 
   componentWillMount() {
     axios.get('/api/all_breweries')
     .then(res => {
       let breweries = res.data.entries;
-      this.setState({ breweries })
+      this.setState({ breweries, visible: res.data })
       this.props.dispatch({ type: 'HEADERS', headers: res.headers })
     }).catch(err => {
       console.log("NoBreweryForYou = " + err)
     })
-  }  
+  }
+  handleChange = (e) => {
+    this.setState({ search: e.target.value }
+    );
+  }
 
   render(){
-    const breweries = this.state.breweries
+    let filteredBreweries = this.state.breweries.filter(
+      (brewery) => {
+        return brewery.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+      }
+    )
 
     return(
       <Segment style={styles.header}>
@@ -29,14 +37,24 @@ class Breweries extends React.Component{
           <Header
             as='h1'
             textAlign='center'
-            style={styles.whiteText}
+            style={styles.header}
           >
             Breweries
-            </Header>
+          </Header>
           <Divider />
             <Grid centered>
+              <Grid.Row>
+                <Grid.Column mobile={16} tablet={16} computer={4}>
+                  <Input
+                    value={this.state.search}
+                    onChange={this.handleChange}
+                    icon={{ name: 'search', circular: true }}
+                    placeholder="Search..."
+                  />
+                </Grid.Column>
+              </Grid.Row>  
               {
-                breweries.map(b =>
+                filteredBreweries.map(b =>
                   <Grid.Column computer={5} tablet={8} mobile={16}>
                     <Card>
                       <Image src='http://enlightenedbeer.com/img/brewery02.jpg' />
@@ -97,7 +115,7 @@ class Breweries extends React.Component{
 const styles = {
   header:{
     textAlign: 'center',
-    color: 'black',
+    color: 'white',
     fontHeight: 100,
   },
   description:{
