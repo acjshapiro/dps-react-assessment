@@ -57,7 +57,7 @@ class Locations extends React.Component{
                 filteredLocations.map(l =>
                   <Grid.Column computer={4} tablet={8} mobile={16}>
                     <Card>
-                      <Image src='https://sep.yimg.com/ay/kkapers2/store-locations-30.gif' />
+                      <Image style={styles.images} src={ l.brewery.images? l.brewery.images.large : 'https://sep.yimg.com/ay/kkapers2/store-locations-30.gif'} />
                       <Card.Content>
                         <Card.Header>{l.name}</Card.Header>
                         <Card.Description>Address: { l.street_address? l.street_address : 'N/A'}</Card.Description>
@@ -108,6 +108,11 @@ const styles = {
   scroller: { 
     height: '60vh', 
     overflow: 'auto',
+  },
+  images: {
+    height: '100px',
+    width: '290px',
   }
+
 }
 export default Locations;
